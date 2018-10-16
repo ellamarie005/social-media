@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 // Load User model
 const User = require('../../models/User');
 
-// route: this is a GET request api/users/test
+// route: this is a POST request api/users/test
 // description: Test post route
 // access: Public
 router.get('/test', (req, res) => {
@@ -49,9 +49,40 @@ router.post('/register', (req, res) => {
             newUser.save()
               .then(user => res.json(user))
               .catch(err => console.log(err))
-          })
-        })
+          });
+        });
       }
-    })
+    });
 });
+
+// route: this is a GET request api/users/login
+// description: login a user
+// access: Public
+
+router.post('/login', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  //Find the user by email
+  User.findOne({ email })
+    .then(user => {
+      // Check if user exist or not
+      if (!user) {
+        return res.status(400).json({ email: 'User not found' });
+      }
+
+      // Check password
+      // user.password is the one created from the hash
+      bcrypt.compare(password, user.password)
+        .then(isMatch => {
+          if (isMatch) {
+            res.json({msg: 'Success'})
+          } else {
+            return res.status(400).json({password: 'Password incorrect'})
+          }
+        })
+    });
+});
+
+
 module.exports = router;
