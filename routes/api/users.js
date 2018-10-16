@@ -1,12 +1,57 @@
 const express = require('express');
-
 const router = express.Router();
+const gravatar = require('gravatar');
+// bcrypt will allow the password to be encrypted
+const bcrypt = require('bcryptjs');
+
+// Load User model
+const User = require('../../models/User');
 
 // route: this is a GET request api/users/test
 // description: Test post route
 // access: Public
 router.get('/test', (req, res) => {
-  res.json({msg: 'Users Works'});
+  res.json({ msg: 'Users Works' });
 });
 
+// route: this is a GET request api/users/register
+// description: register a user
+// access: Public
+
+router.post('/register', (req, res) => {
+  // 1. find if email exists
+  // the req.body.email will eventually be a form from the REACT side
+  // note: make sure bodyParser is passed in server.js is req.body will be used
+  User.findOne({ email: req.body.email })
+    .then((user) => {
+      if (user) {
+        return res.status(400).json({ email: 'Email already Exists' });
+      } else {
+        const avatar = gravatar.url(req.body.email, {
+          s: '200', //Size
+          r: 'pg', // Rating
+          d: 'mm' // Default - if there's no photo available
+        })
+        const newUser = new User({
+          name: req.body.name,
+          email: req.body.email,
+          // since avatar is equals avatar, you can actually just call avatar by itself.
+          avatar: avatar,
+          password: req.body.password
+        });
+
+        // genSalt will take parameters, 10 is the characters, then pass on a callback function
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            // turn the newUser's password into hash
+            newUser.password = hash;
+            newUser.save()
+              .then(user => res.json(user))
+              .catch(err => console.log(err))
+          })
+        })
+      }
+    })
+});
 module.exports = router;
