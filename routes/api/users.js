@@ -27,9 +27,9 @@ router.get('/test', (req, res) => {
 router.post('/register', (req, res) => {
   // errors and isValid all came from the register.js in the validation folder.
   // the req.body in the validateRegisterInput is from input and passing them through the validation function
-  const {errors, isValid} = validateRegisterInput(req.body);
+  const { errors, isValid } = validateRegisterInput(req.body);
   // Check Validation
-  if(!isValid) {
+  if (!isValid) {
     return res.status(400).json(errors);
   }
   // 1. find if email exists
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
-        errors.email = 'Email Already exoists';
+        errors.email = 'Email Already exists';
         return res.status(400).json(errors);
       } else {
         const avatar = gravatar.url(req.body.email, {
