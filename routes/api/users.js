@@ -7,6 +7,8 @@ const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
 
+// Load input validation
+const validateRegisterInput = require('../../validation/register');
 
 // Load User model
 const User = require('../../models/User');
@@ -23,13 +25,21 @@ router.get('/test', (req, res) => {
 // access: Public
 
 router.post('/register', (req, res) => {
+  // errors and isValid all came from the register.js in the validation folder.
+  // the req.body in the validateRegisterInput is from input and passing them through the validation function
+  const {errors, isValid} = validateRegisterInput(req.body);
+  // Check Validation
+  if(!isValid) {
+    return res.status(400).json(errors);
+  }
   // 1. find if email exists
   // the req.body.email will eventually be a form from the REACT side
   // note: make sure bodyParser is passed in server.js is req.body will be used
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
-        return res.status(400).json({ email: 'Email already Exists' });
+        errors.email = 'Email Already exoists';
+        return res.status(400).json(errors);
       } else {
         const avatar = gravatar.url(req.body.email, {
           s: '200', //Size
