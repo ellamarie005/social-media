@@ -12,16 +12,16 @@ const validatePostInput = require('../../validation/post');
 // route: this is a GET request api/posts/test
 // description: Test post route
 // access: Public
-router.get('/test', (req, res) => {res.json({msg: 'Posts Works'});});
+router.get('/test', (req, res) => { res.json({ msg: 'Posts Works' }); });
 
 // route: this is a POST request api/posts
 // description: Create post
 // access: Private
-router.post('/', passport.authenticate('jwt', {session: false}, (req, res) => {
-  const {errors, isValid} = validatePostInput(req.body);
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+  const { errors, isValid } = validatePostInput(req.body);
   // check validate
   if (!isValid) {
-    return res.status(404).json(errors);
+    return res.status(400).json(errors);
   }
   const newPost = new Post({
     text: req.body.text,
@@ -29,9 +29,7 @@ router.post('/', passport.authenticate('jwt', {session: false}, (req, res) => {
     avatar: req.body.avatar,
     user: req.user.id
   });
-  newPost.save().then(post => {
-    res.json(post);
-  })
-}));
+  newPost.save().then(post => res.json(post));
+});
 
 module.exports = router;
