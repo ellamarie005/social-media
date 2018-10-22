@@ -217,7 +217,7 @@ In addition to [ES6](https://github.com/lukehoban/es6features) syntax features, 
 - [Async/await](https://github.com/tc39/ecmascript-asyncawait) (ES2017).
 - [Object Rest/Spread Properties](https://github.com/tc39/proposal-object-rest-spread) (ES2018).
 - [Dynamic import()](https://github.com/tc39/proposal-dynamic-import) (stage 3 proposal)
-- [Class Fields and Static Properties](https://github.com/tc39/proposal-class-public-fields) (part of stage 3 proposal).
+- [className Fields and Static Properties](https://github.com/tc39/proposal-className-public-fields) (part of stage 3 proposal).
 - [JSX](https://facebook.github.io/react/docs/introducing-jsx.html) and [Flow](https://flow.org/) syntax.
 
 Learn more about [different proposal stages](https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-).
@@ -392,7 +392,7 @@ For example:
 ```js
 import React, { Component } from 'react';
 
-class Button extends Component {
+className Button extends Component {
   render() {
     // ...
   }
@@ -407,7 +407,7 @@ export default Button; // Don’t forget to use export default!
 import React, { Component } from 'react';
 import Button from './Button'; // Import a component from another file
 
-class DangerButton extends Component {
+className DangerButton extends Component {
   render() {
     return <Button color="red" />;
   }
@@ -449,7 +449,7 @@ export { moduleA };
 ```js
 import React, { Component } from 'react';
 
-class App extends Component {
+className App extends Component {
   handleClick = () => {
     import('./moduleA')
       .then(({ moduleA }) => {
@@ -500,10 +500,10 @@ This project setup uses [Webpack](https://webpack.js.org/) for handling all asse
 import React, { Component } from 'react';
 import './Button.css'; // Tell Webpack that Button.js uses these styles
 
-class Button extends Component {
+className Button extends Component {
   render() {
     // You can use them as regular CSS styles
-    return <div className="Button" />;
+    return <div classNameName="Button" />;
   }
 }
 ```
@@ -518,11 +518,11 @@ If you are concerned about using Webpack-specific semantics, you can put all you
 
 > Note: this feature is available with `react-scripts@2.0.0` and higher.
 
-This project supports [CSS Modules](https://github.com/css-modules/css-modules) alongside regular stylesheets using the `[name].module.css` file naming convention. CSS Modules allows the scoping of CSS by automatically creating a unique classname of the format `[filename]\_[classname]\_\_[hash]`.
+This project supports [CSS Modules](https://github.com/css-modules/css-modules) alongside regular stylesheets using the `[name].module.css` file naming convention. CSS Modules allows the scoping of CSS by automatically creating a unique classNamename of the format `[filename]\_[classNamename]\_\_[hash]`.
 
 > **Tip:** Should you want to preprocess a stylesheet with Sass then make sure to [follow the installation instructions](#adding-a-sass-stylesheet) and then change the stylesheet file extension as follows: `[name].module.scss` or `[name].module.sass`.
 
-CSS Modules let you use the same CSS class name in different files without worrying about naming clashes. Learn more about CSS Modules [here](https://css-tricks.com/css-modules-part-1-need/).
+CSS Modules let you use the same CSS className name in different files without worrying about naming clashes. Learn more about CSS Modules [here](https://css-tricks.com/css-modules-part-1-need/).
 
 ### `Button.module.css`
 
@@ -547,21 +547,21 @@ import React, { Component } from 'react';
 import styles from './Button.module.css'; // Import css modules stylesheet as styles
 import './another-stylesheet.css'; // Import regular stylesheet
 
-class Button extends Component {
+className Button extends Component {
   render() {
     // reference as a js object
-    return <button className={styles.error}>Error Button</button>;
+    return <button classNameName={styles.error}>Error Button</button>;
   }
 }
 ```
 
 ### Result
 
-No clashes from other `.error` class names
+No clashes from other `.error` className names
 
 ```html
 <!-- This button has red background but not red text -->
-<button class="Button_error_ax7yz"></div>
+<button className="Button_error_ax7yz"></div>
 ```
 
 **This is an optional feature.** Regular `<link>` stylesheets and CSS files are fully supported. CSS Modules are turned on for files ending with the `.module.css` extension.
@@ -570,7 +570,7 @@ No clashes from other `.error` class names
 
 > Note: this feature is available with `react-scripts@2.0.0` and higher.
 
-Generally, we recommend that you don’t reuse the same CSS classes across different components. For example, instead of using a `.Button` CSS class in `<AcceptButton>` and `<RejectButton>` components, we recommend creating a `<Button>` component with its own `.Button` styles, that both `<AcceptButton>` and `<RejectButton>` can render (but [not inherit](https://facebook.github.io/react/docs/composition-vs-inheritance.html)).
+Generally, we recommend that you don’t reuse the same CSS classNamees across different components. For example, instead of using a `.Button` CSS className in `<AcceptButton>` and `<RejectButton>` components, we recommend creating a `<Button>` component with its own `.Button` styles, that both `<AcceptButton>` and `<RejectButton>` can render (but [not inherit](https://facebook.github.io/react/docs/composition-vs-inheritance.html)).
 
 Following this rule often makes CSS preprocessors less useful, as features like mixins and nesting are replaced by component composition. You can, however, integrate a CSS preprocessor if you find it valuable.
 
@@ -1860,7 +1860,7 @@ Create React App doesn't provide any built-in functionality to publish a compone
 
 ## Making a Progressive Web App
 
-The production build has all the tools necessary to generate a first-class
+The production build has all the tools necessary to generate a first-className
 [Progressive Web App](https://developers.google.com/web/progressive-web-apps/),
 but **the offline/cache-first behavior is opt-in only**. By default,
 the build process will generate a service worker file, but it will not be
