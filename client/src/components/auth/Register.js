@@ -43,7 +43,7 @@ class Register extends Component {
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Sign Up</h1>
               <p className="lead text-center">Create your DevConnector account</p>
-              <form onSubmit={this.onSubmit}>
+              <form noValidate onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -65,7 +65,7 @@ class Register extends Component {
                     name="email"
                     value={this.state.email}
                     onChange={this.onChange} />
-                    {errors.name && (<div className='invalid-feedback'>{errors.email}</div>)}
+                    {errors.email && (<div className='invalid-feedback'>{errors.email}</div>)}
                   <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                 </div>
                 <div className="form-group">
@@ -75,7 +75,7 @@ class Register extends Component {
                     placeholder="Password" name="password"
                     value={this.state.password}
                     onChange={this.onChange} />
-                    {errors.name && (<div className='invalid-feedback'>{errors.password}</div>)}
+                    {errors.password && (<div className='invalid-feedback'>{errors.password}</div>)}
                 </div>
                 <div className="form-group">
                   <input
@@ -85,7 +85,7 @@ class Register extends Component {
                     name="password2"
                     value={this.state.password2}
                     onChange={this.onChange} />
-                    {errors.name && (<div className='invalid-feedback'>{errors.password2}</div>)}
+                    {errors.password2 && (<div className='invalid-feedback'>{errors.password2}</div>)}
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>

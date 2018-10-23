@@ -36,7 +36,7 @@ module.exports = function validateRegisterInput(data) {
     } // if password is not between 6 to 30 characters
   }
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'Confirm password field must be required';
+    errors.password2 = 'Confirm password field is required';
   } // if left blank
   else {
     if (!Validator.equals(data.password, data.password2)) {
