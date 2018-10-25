@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
 // bcrypt will allow the password to be encrypted
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
 const passport = require('passport');
+const keys = require('../../config/keys');
+const gravatar = require('gravatar');
 
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
