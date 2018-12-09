@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
-import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -23,6 +22,12 @@ class Register extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({errors: nextProps.errors});
+    }
+  }
+
   onSubmit(event) {
     event.preventDefault();
     const newUser = {
@@ -33,18 +38,12 @@ class Register extends Component {
     }
 
     this.props.registerUser(newUser);
-    // axios.post('/api/users/register', newUser)
-    //   .then(res => console.log(res.data))
-    //   // the catch here allows for the errors in state to be set to the error messages set in the backend
-    //   .catch(err => this.setState({ errors: err.response.data }));
   }
 
   render() {
     const { errors } = this.state;
-    const { user } = this.props.auth;
     return (
       <div className="register">
-        {user ? user.name : null}
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
@@ -107,12 +106,14 @@ class Register extends Component {
 // mapping all the prop types
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   // coming from the rootreducer
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(mapStateToProps, { registerUser })(Register);
