@@ -5,6 +5,7 @@ import store from './store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import {setCurrentUser, logoutUser} from './actions/authActions';
+import { clearCurrentProfile } from './actions/profileActions';
 
 import NavBar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -30,6 +31,7 @@ if (localStorage.jwtToken) {
     //logout the user if time is up
     store.dispatch(logoutUser());
     // TODO: Clear current profile
+    store.dispatch(clearCurrentProfile());
     // Redirect to login
     window.location.href = '/login'
   }
