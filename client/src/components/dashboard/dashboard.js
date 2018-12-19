@@ -13,4 +13,7 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  
+}
 export default connect(null, { getCurrentProfile })(Dashboard);
