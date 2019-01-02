@@ -18,7 +18,7 @@ class CreateProfile extends Component {
       location: '',
       status: '',
       skills: '',
-      guthubusername: '',
+      githubusername: '',
       bio: '',
       twitter: '',
       facebook: '',
