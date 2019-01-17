@@ -9,6 +9,9 @@ const posts = require('./routes/api/posts');
 
 const app = express();
 
+// this is for removing the deprecating warning
+mongoose.set('useFindAndModify', false);
+
 // Body Parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
