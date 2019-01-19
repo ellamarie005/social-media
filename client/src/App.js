@@ -25,7 +25,7 @@ import './App.css';
 if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
-  // Decode token and get user infor and exp
+  // Decode token and get user info and exp
   const decode = jwt_decode(localStorage.jwtToken);
   // set user and is authenticated
   store.dispatch(setCurrentUser(decode));
