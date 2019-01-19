@@ -4,7 +4,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {addEducation} from '../../actions/profileActions';
+import { addEducation } from '../../actions/profileActions';
 
 class AddEducation extends Component {
   constructor(props) {
@@ -27,8 +27,8 @@ class AddEducation extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.errors) {
-      this.setState({errors: nextProps.errors})
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors })
     }
   }
   onSubmit(e) {
@@ -148,4 +148,4 @@ const mapStateToProps = state => ({
   errors: state.errors
 })
 
-export default connect(mapStateToProps, {addEducation} )(withRouter(AddEducation));
+export default connect(mapStateToProps, { addEducation })(withRouter(AddEducation));
