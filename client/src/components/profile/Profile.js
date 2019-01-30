@@ -17,12 +17,38 @@ class Profile extends Component {
   }
 
   render() {
+    const { profile, loading } = this.props.profile;
+    let profileContent;
+
+    if (profile === null) {
+      profileContent = <Spinner />
+    } else {
+      profileContent = (
+        <div>
+          <div className='row'>
+            <div className='col-md-6'>
+              <Link to='/profiles' className='btn btn-light mb-3 float-left'>
+                Back To Profile</Link>
+            </div>
+            <div className='col-md-6' />
+          </div>
+          <ProfileHeader />
+          <ProfileAbout />
+          <ProfileCreds />
+          <ProfileGithub />
+        </div>
+      );
+    }
     return (
-      <div>
-        <ProfileHeader />
-        <ProfileAbout/>
-        <ProfileCreds />
-        <ProfileGithub />
+      <div className='profile'>
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-12'>
+            {profileContent}
+            </div>
+          </div>
+        </div>
+
       </div>
     )
   }
@@ -37,4 +63,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 })
 
-export default connect(mapStateToProps, {getProfileByHandle})(Profile);
+export default connect(mapStateToProps, { getProfileByHandle })(Profile);
