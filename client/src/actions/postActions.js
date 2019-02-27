@@ -7,7 +7,7 @@ export const addPost = postData => dispatch => {
   axios
     .post('/api/posts', postData)
     .then(res =>
-      dispatchEvent({
+      dispatch({
         type: ADD_POST,
         payload: res.data
       })
