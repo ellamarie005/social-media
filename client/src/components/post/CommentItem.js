@@ -10,7 +10,6 @@ class CommentItem extends Component {
 
   render() {
     const { comment, postId, auth } = this.props;
-    console.log(comment);
     return (
       <div>
         <div className="card card-body mb-3">
