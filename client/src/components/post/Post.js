@@ -26,7 +26,6 @@ class Post extends Component {
           <CommentFeed postId={post._id} comments={post.comments} />
         </div>
       )
-      console.log(post.comments)
     }
     return (
       <div className='post'>
