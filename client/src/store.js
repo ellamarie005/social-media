@@ -10,7 +10,7 @@ const store = createStore(
   compose(
     applyMiddleware(...middleware),
     // the next line is to allow redux devtools on google chrome to work -- to see state and the changes
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
   )
 )
 
