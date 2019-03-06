@@ -9,6 +9,7 @@ const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
 const app = express();
+let server = require('http').Server(app);
 
 // this is for removing the deprecating warning
 mongoose.set('useFindAndModify', false);
@@ -50,4 +51,4 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 5000;
 const host = '0.0.0.0';
 
-app.listen(port, host, () => console.log(`Server running on port ${port}`));
+server.listen(port, host, () => console.log(`Server running on port ${port}`));
